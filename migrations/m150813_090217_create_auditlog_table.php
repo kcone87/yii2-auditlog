@@ -1,8 +1,10 @@
 <?php
 /**
  * @package    yiisoft\yii2
- * @subpackage lisi4ok\yii2-auditlog
+ * @subpackage kcone87\yii2-auditlog
  * @author     Nikola Haralamov <lisi4ok@gmail.com>
+ * @author     Ozan Topoglu <ozantopoglu@yahoo.com>
+ * @author     Enock Willy <enokahoyah@gmail.com>
  * @since      2.0.6
  */
 
@@ -21,7 +23,7 @@ class m150813_090217_create_auditlog_table extends Migration
 			'action' => $this->string()->notNull(),
 			'old' => $this->text(),
 			'new' => $this->text(),
-			'at' => $this->integer(),
+			'at' => $this->dateTime(),
 			'by' => $this->integer(),
 		]);
 	}

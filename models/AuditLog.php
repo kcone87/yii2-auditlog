@@ -12,8 +12,10 @@ namespace kcone87\auditlog\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\helpers\Json;
 use app\models\User;
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "auditlog".
  *
@@ -32,6 +34,21 @@ class AuditLog extends ActiveRecord
 	{
 		return 'auditlog';
 	}
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'updatedAtAttribute' => false,
+                'createdAtAttribute' => 'at',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
 
 	public function rules()
 	{
