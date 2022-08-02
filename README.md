@@ -1,7 +1,7 @@
 Yii2 Audit Log
 ==============
-Yii2 Audit Log. This extension log all models actions -> find/insert/update/delete.
-This extention is a fork from Nikola Haralamov's original extention lisi4ok/yii2-auditlog
+Yii2 Audit Log. This extension logs all models actions; find/insert/update/delete.
+This extension is a fork from Ozan Topoglu's original extension ozantopoglu/yii2-auditlog
 Installation
 ------------
 
@@ -24,6 +24,14 @@ to the require section of your `composer.json` file.
 Go to yii app folder. and type:
 ```
 ./yii migrate --migrationPath=@vendor/kcone87/yii2-auditlog/migrations
+```
+
+add these lines in the "repositories" section
+```
+{
+    "type": "vcs",
+    "url": "https://github.com/kcone87/yii2-auditlog"
+}
 ```
 
 Usage
