@@ -8,7 +8,7 @@
  * @since      2.0.6
  */
 
-namespace ozantopoglu\auditlog\behaviors;
+namespace kcone87\auditlog\behaviors;
 
 use Exception;
 use DateTime;
@@ -16,7 +16,7 @@ use Yii;
 use yii\base\Behavior;
 use yii\base\Application;
 use yii\db\BaseActiveRecord;
-use ozantopoglu\auditlog\models\AuditLog;
+use kcone87\auditlog\models\AuditLog;
 
 class LoggableBehavior extends Behavior
 {
