@@ -8,7 +8,7 @@
  * @since      2.0.6
  */
 
-namespace ozantopoglu\auditlog\models;
+namespace kcone87\auditlog\models;
 
 use Yii;
 use yii\db\ActiveRecord;
