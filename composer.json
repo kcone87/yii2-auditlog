@@ -1,5 +1,5 @@
 {
-	"name": "ozantopoglu/yii2-auditlog",
+	"name": "kcone87/yii2-auditlog",
 	"description": "Yii2 Audit Log. This extension log all models actions -> find/insert/update/delete.",
 	"type": "yii2-extension",
 	"keywords": ["yii2","extension"],
@@ -12,14 +12,19 @@
 		{
 			"name": "Ozan Topoglu",
 			"email": "ozantopoglu@yahoo.com"
+		},
+		{
+			"name": "Enock Willy",
+			"email": "enokahoyah@gmail.com"
 		}
 	],
 	"require": {
-		"yiisoft/yii2": "*"
+		"php": ">=7.3",
+		"yiisoft/yii2": "~2.0.16"
 	},
 	"autoload": {
 		"psr-4": {
-			"ozantopoglu\\auditlog\\": ""
+			"kcone87\\auditlog\\": ""
 		}
 	}
 }
