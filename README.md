@@ -10,20 +10,20 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist ozantopoglu/yii2-auditlog "*"
+php composer.phar require --prefer-dist kcone87/yii2-auditlog "*"
 ```
 
 or add
 
 ```
-"ozantopoglu/yii2-auditlog": "*"
+"kcone87/yii2-auditlog": "*"
 ```
 
 to the require section of your `composer.json` file.
 
 Go to yii app folder. and type:
 ```
-./yii migrate --migrationPath=@vendor/ozantopoglu/yii2-auditlog/migrations
+./yii migrate --migrationPath=@vendor/kcone87/yii2-auditlog/migrations
 ```
 
 Usage
@@ -32,7 +32,7 @@ Usage
 <?php
 namespace app\models;
 use Yii;
-use ozantopoglu\auditlog\behaviors\LoggableBehavior;
+use kcone87\auditlog\behaviors\LoggableBehavior;
 
 class MyModel extends \yii\db\ActiveRecord
 {
