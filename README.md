@@ -26,6 +26,14 @@ Go to yii app folder. and type:
 ./yii migrate --migrationPath=@vendor/kcone87/yii2-auditlog/migrations
 ```
 
+add these lines in the "repositories" section
+```
+{
+    "type": "vcs",
+    "url": "https://github.com/kcone87/yii2-auditlog"
+}
+```
+
 Usage
 ------------
 ```
