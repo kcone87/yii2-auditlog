@@ -32,7 +32,7 @@ class AuditLog extends ActiveRecord
 {
 	public static function tableName()
 	{
-		return 'auditlog';
+		return 'audit_log';
 	}
 
     /**
