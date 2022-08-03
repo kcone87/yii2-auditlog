@@ -10,9 +10,9 @@
 
 use yii\db\Migration;
 
-class m150813_090217_create_auditlog_table extends Migration
+class m220803_092517_create_auditlog_table extends Migration
 {
-	CONST TABLE_NAME = 'auditlog';
+	CONST TABLE_NAME = 'audit_log';
 
 	public function up()
 	{
