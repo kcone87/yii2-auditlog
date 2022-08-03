@@ -87,13 +87,13 @@ class AuditLog extends ActiveRecord
     }
 
 
-    public static function compare($model, $pk, $from = 0, $to = 0, $formatter = [])
+    public static function compare($class, $model, $pk, $from = 0, $to = 0, $formatter = [])
     {
         $model = explode('\\', $model);
         $model = end($model);
         if ($to == 0) $to = 9999999999;
         $logs = AuditLog::find()
-            ->where(['model' => $model, 'pk' => $pk])
+            ->where(['class_name' => $class, 'model' => $model, 'pk' => $pk])
             ->andWhere(['>=', 'at', $from])
             ->andWhere(['<', 'at', $to])
             ->cache(10)
