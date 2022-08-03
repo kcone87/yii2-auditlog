@@ -18,6 +18,7 @@ class m220803_092517_create_auditlog_table extends Migration
 	{
 		$this->createTable(self::TABLE_NAME, [
 			'id' => $this->primaryKey(),
+			'class_name' => $this->string()->notNull(),
 			'model' => $this->string()->notNull(),
 			'pk'=> $this->integer()->notNull(),
 			'action' => $this->string()->notNull(),

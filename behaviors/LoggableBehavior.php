@@ -82,6 +82,7 @@ class LoggableBehavior extends Behavior
 		}
 		$classNamePath = explode('\\', $this->owner->className());
 		$auditLog->model = end($classNamePath);
+        $auditLog->class_name = $this->owner->className();
 		$auditLog->pk = $this->pk;
 		$auditLog->action = self::ACTION_INSERT;
 		$auditLog->old = null;
@@ -141,6 +142,7 @@ class LoggableBehavior extends Behavior
 		}
 		$classNamePath = explode('\\', $this->owner->className());
 		$auditLog->model = end($classNamePath);
+        $auditLog->class_name = $this->owner->className();
 		$auditLog->pk = $this->pk;
 		$auditLog->action = self::ACTION_UPDATE;
 		$auditLog->old = json_encode($oldAttributes);
@@ -188,6 +190,7 @@ class LoggableBehavior extends Behavior
 		}
 		$classNamePath = explode('\\', $this->owner->className());
 		$auditLog->model = end($classNamePath);
+		$auditLog->class_name = $this->owner->className();
 		$auditLog->pk = $this->pk;
 		$auditLog->action = self::ACTION_DELETE;
 		$auditLog->old = json_encode($oldAttributes);
