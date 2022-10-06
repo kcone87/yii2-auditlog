@@ -10,12 +10,12 @@
 
 namespace kcone87\auditlog\models;
 
+use app\models\User;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\Json;
-use app\models\User;
-use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "audit_log".
@@ -59,6 +59,13 @@ class AuditLog extends ActiveRecord
             [['old', 'new'], 'string'],
             [['at', 'by'], 'safe'],
             [['model', 'action'], 'string', 'max' => 255],
+            ['new', function ($attribute, $params, $validator) {
+                $delta = AuditLog::delta($this, $this, False);
+
+                if (count($delta) === 0) {
+                    $this->addError($attribute, 'There is no change in attributes. Audit Log is not valid');
+                }
+            }],
         ];
     }
 
@@ -87,13 +94,13 @@ class AuditLog extends ActiveRecord
     }
 
 
-    public static function compare($class, $model, $pk, $from = 0, $to = 0, $formatter = [])
+    public static function compare($model, $pk, $from = 0, $to = 0, $formatter = [])
     {
         $model = explode('\\', $model);
         $model = end($model);
         if ($to == 0) $to = 9999999999;
-        $logs = AuditLog::find()
-            ->where(['class_name' => $class, 'model' => $model, 'pk' => $pk])
+        $logs = self::find()
+            ->where(['model' => $model, 'pk' => $pk])
             ->andWhere(['>=', 'at', $from])
             ->andWhere(['<', 'at', $to])
             ->cache(10)
@@ -102,6 +109,12 @@ class AuditLog extends ActiveRecord
         $old = current($logs);
         $new = end($logs);
 
+
+        return self::delta($old, $new);
+    }
+
+    public static function delta($old, $new, $includeUnchanged = True)
+    {
         $result = [];
 
         if (isset($old) && isset($new) && $new != false && $old != false) {
@@ -122,16 +135,20 @@ class AuditLog extends ActiveRecord
 
 
             foreach ($old_values as $key => $value) {
-                if (isset($formatter[$key])) $format = $formatter[$key]; else $format = function ($value) {
+                $format = $formatter[$key] ?? static function ($value) {
                     return $value;
                 };
                 if (isset ($old_change[$key]) || isset ($new_change[$key])) {
                     $result[$key] ['old'] = $format($old_change[$key]);
                     $result[$key] ['new'] = $format($new_change[$key]);
                     //	$result[$key] = 'CHANGED: '.$old_change[$key]. ' --> '. $new_change[$key];
-                } else $result[$key] = $format($value);
+                } else {
+                    if ($includeUnchanged) {
+                        $result[$key] = $format($value);
+                    }
+                }
             }
+            return $result;
         }
-        return $result;
     }
 }
