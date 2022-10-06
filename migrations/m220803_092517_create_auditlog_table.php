@@ -7,6 +7,7 @@
  * @author     Enock Willy <enokahoyah@gmail.com>
  * @since      2.0.6
  */
+namespace kcone87\auditlog\migrations;
 
 use yii\db\Migration;
 
