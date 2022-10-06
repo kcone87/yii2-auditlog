@@ -29,6 +29,7 @@ class LoggableBehavior extends Behavior
 	public $ignorePrimaryKey = false;
 	public $ignorePrimaryKeyForActions = [];
 	public $pk;
+    public $model = AuditLog::class;
 
 
 	private static $_oldAttributes;
@@ -51,7 +52,7 @@ class LoggableBehavior extends Behavior
 
 	public function afterInsert()
 	{
-		$auditLog = new AuditLog;
+		$auditLog = new $this->model;
 		$dateTime = new DateTime;
 		$this->setNewAttributes($this->owner->attributes);
 		$newAttributes = $this->getNewAttributes();
@@ -103,7 +104,7 @@ class LoggableBehavior extends Behavior
 
 	public function afterUpdate()
 	{
-		$auditLog = new AuditLog;
+		$auditLog = new $this->model;
 		$dateTime = new DateTime;
 
 		$oldAttributes = $this->getOldAttributes();
@@ -158,7 +159,7 @@ class LoggableBehavior extends Behavior
 
 	public function beforeDelete()
 	{
-		$auditLog = new AuditLog;
+		$auditLog = new $this->model;
 		$dateTime = new DateTime;
 		$this->setOldAttributes($this->owner->attributes);
 		$oldAttributes = $this->getOldAttributes();
