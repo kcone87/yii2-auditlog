@@ -84,16 +84,6 @@ class AuditLog extends ActiveRecord
         ];
     }
 
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAuthor()
-    {
-        return $this->hasOne(User::className(), ['id' => 'by']);
-    }
-
-
     public static function compare($model, $pk, $from = 0, $to = 0, $formatter = [])
     {
         $model = explode('\\', $model);
@@ -150,5 +140,31 @@ class AuditLog extends ActiveRecord
             }
             return $result;
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDiffHtml()
+    {
+        $old = explode("\n", $this->old);
+        $new = explode("\n", $this->new);
+
+        foreach ($old as $i => $line) {
+            $old[$i] = rtrim($line, "\r\n");
+        }
+        foreach ($new as $i => $line) {
+            $new[$i] = rtrim($line, "\r\n");
+        }
+
+        return (new \Diff($old, $new))->render(new \Diff_Renderer_Html_Inline());
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthor()
+    {
+        return $this->hasOne(User::className(), ['id' => 'by']);
     }
 }
